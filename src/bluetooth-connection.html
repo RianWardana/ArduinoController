@@ -1,0 +1,139 @@
+<dom-module id="bluetooth-connection">
+    <template>
+        <style include="iron-flex iron-flex-alignment">
+            :host {
+                --paper-spinner-layer-1-color: #00979D;
+                --paper-spinner-layer-2-color: #FF9800;
+                --paper-spinner-layer-3-color: #00979D;
+                --paper-spinner-layer-4-color: #FF9800;
+            }
+
+            paper-dialog#dialog {
+                margin: 20px;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            iron-pages {
+                height: 200px;
+            }
+
+            paper-spinner {
+                position: absolute;
+                top: 70px;
+                height: 35px;
+                width: 35px;
+            }
+        </style>
+
+
+        <paper-dialog id="dialog" entry-animation="slide-from-top-animation" exit-animation="fade-out-animation">
+            <h2>Connect to a bluetooth device</h2>
+                <paper-dialog-scrollable>
+                    <iron-pages attr-for-selected="view" selected="{{viewSekarang}}">
+                        <div view="spinner">
+                            <div class="horizontal center-justified layout">
+                                <paper-spinner active></paper-spinner>
+                            </div>
+                        </div>
+                    
+                        <div view="list">
+                            <template is="dom-repeat" items="{{pairedDevices}}">
+                                <paper-item on-tap="_deviceSelected">{{item.name}}</paper-item>
+                            </template>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                            <paper-item>sadasd</paper-item>
+                        </div>
+                    </iron-pages>
+                </paper-dialog-scrollable>
+        </paper-dialog>
+
+        <paper-toast id="toastConnectionFail" text="Fail to connect."></paper-toast>
+    </template>
+
+
+
+    <script>
+        Polymer({
+            is: 'bluetooth-connection',
+            properties: {
+                trigger: {
+                    type: Number,
+                    observer: '_triggered'
+                },
+
+                viewSekarang: {
+                    type: String,
+                    value: 'spinner'
+                },
+
+                openCount: {
+                    type: Number,
+                    value: 0
+                },
+
+                pairedDevices: {
+                    type: Array,
+                    value: []
+                }
+            },
+
+            ready: function() {
+                thisBtCon = this;
+            },
+
+            enableBluetooth: function() {
+                console.log("deviceready");
+
+                bluetoothSerial.enable(thisBtCon.listPaired, function() {
+                    console.log("Fail to enable bluetooth");
+                });
+            },
+
+            listPaired: function() {
+                console.log("listpaired");
+
+                bluetoothSerial.list(function(devices) {
+                    devices.forEach(function(device) {
+                        thisBtCon.push('pairedDevices', {
+                            address: device.address,
+                            name: device.name
+                        })
+                    });
+                    thisBtCon.viewSekarang = 'list';
+                }, function() {
+                    console.log("Fail to list paired devices.")
+                });
+            },
+
+            _triggered: function() {
+                console.log('teransang');
+                this.$.dialog.open();
+                if (this.openCount == 0) document.addEventListener("deviceready", this.enableBluetooth, false);
+            },
+
+            _deviceSelected: function(e) {
+                this.viewSekarang = 'spinner';
+                this.deviceName = e.model.item.name;
+                bluetoothSerial.connect(e.model.item.address, this.onConnectSuccessful, this.onConnectFail);
+            },
+
+            onConnectSuccessful: function() {
+                thisBtCon.viewSekarang = 'list';
+            },
+
+            onConnectFail: function() {
+                thisBtCon.viewSekarang = 'list';
+                thisBtCon.$.toastConnectionFail.open();
+            },
+
+        });
+    </script>
+</dom-module>

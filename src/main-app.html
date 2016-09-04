@@ -1,0 +1,193 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+
+<link rel="import" href="../bower_components/neon-animation/animations/scale-down-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-from-top-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-up-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+
+<link rel="import" href="bluetooth-control.html">
+<link rel="import" href="bluetooth-connection.html">
+
+
+
+<dom-module id="main-app">
+    <template>
+        <style include="iron-flex iron-flex-alignment">
+            :root {
+                display: block;
+                --app-primary-color: #00979D;
+                --app-secondary-color: black;
+            }
+
+            app-header {
+                background-color: var(--app-primary-color);
+                color: #fff;
+            }
+
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+
+            iron-icon {
+                margin-right: 12px;
+            }
+        </style>
+
+
+        <app-drawer-layout fullbleed>
+            <app-drawer>
+                <iron-selector selected="{{halaman_sekarang}}" attr-for-selected="halaman" class="drawer-list" role="navigation" on-iron-select="onMenuSelect">
+                    <paper-item halaman="Bluetooth Controller">
+                        <iron-icon icon="hardware:gamepad"></iron-icon>
+                        Bluetooth Controller
+                    </paper-item>
+                    <paper-item halaman="MQTT Controller">
+                        <iron-icon icon="hardware:gamepad"></iron-icon>
+                        MQTT Controller
+                    </paper-item>
+                    <paper-item halaman="Bluetooth Configuration">
+                        <iron-icon icon="icons:settings-bluetooth"></iron-icon>
+                        Bluetooth Configuration
+                    </paper-item>
+                    <paper-item halaman="MQTT Configuration">
+                        <iron-icon icon="icons:cloud-upload"></iron-icon>
+                        MQTT Configuration
+                    </paper-item>
+                </iron-selector>
+            </app-drawer>
+
+            <app-header-layout>
+                <app-header>
+                    <app-toolbar>
+                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                        <div title style="margin-left: 10px;">{{halaman_sekarang}}</div>
+                        <span class="flex"></span>
+                        <span id="bluetoothButtons">
+                            <paper-icon-button id="buttonBluetoothConnect" icon="device:bluetooth" on-tap="_blutoothConnectClicked"></paper-icon-button>
+                            <paper-icon-button id="buttonBluetoothDisconnect" icon="device:bluetooth-disabled" on-tap="_blutoothDisconnectClicked"></paper-icon-button>
+                        </span>
+                        <span id="mqttButtons">
+                            <paper-icon-button id="buttonMqttConnect" icon="icons:cloud-queue" on-tap="_mqttConnectClicked"></paper-icon-button>
+                            <paper-icon-button id="buttonMqttDisconnect" icon="icons:cloud-off" on-tap="_mqttDisconnectClicked"></paper-icon-button>
+                        </span>
+                    </app-toolbar>
+                </app-header>
+
+                <iron-pages role="main" selected="[[halaman_sekarang]]" attr-for-selected="halaman">
+                    <bluetooth-control halaman="Bluetooth Controller"></bluetooth-control>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
+
+
+        <bluetooth-connection trigger="{{triggerBluetoothConnect}}"></bluetooth-connection>
+
+    </template>
+
+
+
+    <script>
+        Polymer({
+            is: 'main-app',
+            properties: {
+                halaman_sekarang: {
+                    type: String,
+                    value: "Bluetooth Controller",
+                    observer: "_halamanChanged"
+                },
+
+                isBluetoothConnected: {
+                    type: Boolean,
+                    value: false,
+                    observer: '_bluetoothConnectionChanged'
+                },
+
+                isMqttConnected: {
+                    type: Boolean,
+                    value: false,
+                    observer: '_mqttConnectionChanged'
+                },
+
+                triggerBluetoothConnect: {
+                    type: Number
+                }
+            },
+
+            ready: function() {
+                document.addEventListener("deviceready", function() {
+                    StatusBar.backgroundColorByHexString("#007A7F")
+                }, false);
+            },
+
+            onMenuSelect: function() {
+                var drawerLayout = document.querySelector('app-drawer-layout')
+                var drawer = document.querySelector('app-drawer')
+                if (drawerLayout.narrow) drawer.close()
+            },
+
+            _halamanChanged: function(halaman) {
+                if ((halaman == 'Bluetooth Controller') || (halaman == 'Bluetooth Configuration')) {
+                    this.$.bluetoothButtons.style.display = 'block';
+                    this.$.mqttButtons.style.display = 'none';
+                }
+
+                else if ((halaman == 'MQTT Controller') || (halaman == 'MQTT Configuration')) {
+                    this.$.bluetoothButtons.style.display = 'none';
+                    this.$.mqttButtons.style.display = 'block';
+                }
+            },
+
+            _bluetoothConnectionChanged: function(connected) {
+                if (connected) {
+                    this.$.buttonBluetoothConnect.style.display = 'none';
+                    this.$.buttonBluetoothDisconnect.style.display = 'block';
+                }
+                else if (!connected) {
+                    this.$.buttonBluetoothConnect.style.display = 'block';
+                    this.$.buttonBluetoothDisconnect.style.display = 'none';
+                }
+            },
+
+            _mqttConnectionChanged: function(connected) {
+                if (connected) {
+                    this.$.buttonMqttConnect.style.display = 'none';
+                    this.$.buttonMqttDisconnect.style.display = 'block';
+                }
+                else if (!connected) {
+                    this.$.buttonMqttConnect.style.display = 'block';
+                    this.$.buttonMqttDisconnect.style.display = 'none';
+                }
+            },
+
+            _blutoothConnectClicked: function() {
+                this.triggerBluetoothConnect = Math.random();
+            }
+        });
+    </script>
+</dom-module>

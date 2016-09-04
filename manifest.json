@@ -1,0 +1,7 @@
+{
+  "name": "arduinocontroller",
+  "short_name": "arduinocontroller",
+  "description": "Arduino bluetooth and MQTT controller",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,120 @@
+<dom-module id="bluetooth-control">
+    <template>
+        <style include="iron-flex iron-flex-alignment">
+            :host {
+                display: block;
+                /*--iron-icon-height: 40px;
+                --iron-icon-width: 40px;*/
+            }
+            
+            div.pad {
+                width: 230px;
+            }
+
+            paper-button {
+                text-align: center;
+                background-color: #4CB6BA;
+                color: #FFF;
+
+                height: 55px;
+                margin: 5px;
+                width: 50%;
+            }
+
+            paper-button.custom-button {
+                width: 150px;
+            }
+
+            paper-button.button.wide {
+                /*width: 50%;*/
+            }
+            
+
+
+            #leftPad iron-icon {
+                --iron-icon-height: 50px;
+                --iron-icon-width: 50px;
+            }
+
+            #rightPad iron-icon {
+                --iron-icon-height: 30px;
+                --iron-icon-width: 30px;
+            }
+
+            
+        </style>
+
+
+        <div class="horizontal layout" id="containerButtons">
+            <div class="pad" id="leftPad">
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="" id="buttonUp">
+                        <iron-icon icon="hardware:keyboard-arrow-up"></iron-icon>
+                    </paper-button>
+                </div>
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="">
+                        <iron-icon icon="hardware:keyboard-arrow-left"></iron-icon>
+                    </paper-button>
+                    <paper-button raised class="">
+                        <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
+                    </paper-button>
+                </div>
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="" id="buttonUp">
+                        <iron-icon icon="hardware:keyboard-arrow-down"></iron-icon>
+                    </paper-button>
+                </div>
+            </div>
+
+            <span class="flex"></span>
+
+            <div class="vertical layout">
+                <paper-button raised class="custom-button">Custom 1</paper-button>
+                <paper-button raised class="custom-button">Custom 2</paper-button>
+                <paper-button raised class="custom-button">Custom 3</paper-button>
+            </div>
+
+            <span class="flex"></span>
+
+            <div class="pad" id="rightPad">
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="" id="buttonUp">
+                        <iron-icon icon="icons:change-history"></iron-icon>
+                    </paper-button>
+                </div>
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="">
+                        <iron-icon icon="image:crop-din"></iron-icon>
+                    </paper-button>
+                    <paper-button raised class="">
+                        <iron-icon icon="icons:radio-button-unchecked"></iron-icon>
+                    </paper-button>
+                </div>
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="" id="buttonUp">
+                        <iron-icon icon="icons:clear"></iron-icon>
+                    </paper-button>
+                </div>
+            </div>
+        </div>
+
+
+    </template>
+
+
+
+    <script>
+        Polymer({
+            is: 'bluetooth-control',
+            properties: {
+                
+            },
+
+            ready: function() {
+                this.$.containerButtons.style.marginTop = ((window.innerHeight - 60 - 195) / 2) + 'px';
+            }
+
+        });
+    </script>
+</dom-module>
