@@ -1,0 +1,47 @@
+<dom-module id="bluetooth-localstorage">
+    <template>
+        <iron-localstorage 
+            name="bluetooth-key-binding" 
+            value="{{keyBinding}}" 
+            on-iron-localstorage-load-empty="initializeDefault">
+        </iron-localstorage>
+    </template>
+
+
+    <script>
+        Polymer({
+            is: 'bluetooth-localstorage',
+            properties: {
+                keyBinding: {
+                    type: Object,
+                    notify: true
+                }
+            },
+
+            ready: function() {
+               thisBtStr = this;
+            },
+
+            initializeDefault: function() {
+                console.log('initializeDefault');
+                
+                this.keyBinding = {
+                    up: "w",
+                    left: "a",
+                    right: "d",
+                    down: "s",
+                    triangle: "8",
+                    square: "4",
+                    circle: "6",
+                    cross: "5",
+                    custom1text: "Custom 1",
+                    custom2text: "Custom 2",
+                    custom3text: "Custom 3",
+                    custom1: "r",
+                    custom2: "f",
+                    custom3: "v",
+                }
+            }
+        });
+    </script>
+</dom-module>

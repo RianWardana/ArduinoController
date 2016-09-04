@@ -14,6 +14,7 @@
 <link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
@@ -31,8 +32,10 @@
 <link rel="import" href="../bower_components/neon-animation/animations/slide-down-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
 
+
 <link rel="import" href="bluetooth-control.html">
 <link rel="import" href="bluetooth-connection.html">
+<link rel="import" href="bluetooth-localstorage.html">
 
 
 
@@ -100,7 +103,7 @@
                 </app-header>
 
                 <iron-pages role="main" selected="[[halaman_sekarang]]" attr-for-selected="halaman">
-                    <bluetooth-control halaman="Bluetooth Controller"></bluetooth-control>
+                    <bluetooth-control halaman="Bluetooth Controller" key-binding="{{bluetoothKeyBinding}}"></bluetooth-control>
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
@@ -111,6 +114,10 @@
             trigger-disconnect="{{triggerBluetoothDisconnect}}" 
             connected="{{isBluetoothConnected}}" >        
         </bluetooth-connection>
+
+        <bluetooth-localstorage 
+            key-binding="{{bluetoothKeyBinding}}">
+        </bluetooth-localstorage>
 
     </template>
 

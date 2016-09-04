@@ -93,6 +93,7 @@
             </div>
         </div>
 
+        <div>{{keyBinding.custom2text}}</div>
 
     </template>
 
@@ -102,20 +103,43 @@
         Polymer({
             is: 'bluetooth-control',
             properties: {
-                
+                keyBinding: {
+                    type: Object
+                }
             },
 
             ready: function() {
-                this.$.containerButtons.style.marginTop = ((window.innerHeight - 60 - 195) / 2) + 'px';
+                thisBtCtr = this;
 
-                this.$.buttonUp.addEventListener('touchstart', function() {console.log('a')});
-                this.$.buttonDown.addEventListener('touchstart', function() {console.log('b')});
+                this.$.containerButtons.style.marginTop = ((window.innerHeight - 60 - 195) / 2) + 'px';
+                
+                this.setupEventListener();
+
+                var tabll = this.get('keyBinding.down')
+
+                console.log(tabll);
+
+                // this.get('myProp.subProp')
             },
 
             setupEventListener: function() {
-                this.$.buttonUp.addEventListener('touchstart', function() {console.log('a')});
-                this.$.buttonDown.addEventListener('touchstart', function() {console.log('b')});
-            }
+                this.$.buttonUp.addEventListener('touchstart', this.onClickUp);
+                this.$.buttonLeft.addEventListener('touchstart', this.onClickLeft);
+                this.$.buttonRight.addEventListener('touchstart', this.onClickRight);
+                this.$.buttonDown.addEventListener('touchstart', this.onClickDown);
+
+                this.$.buttonTriangle.addEventListener('touchstart', this.onClickTriangle);
+                this.$.buttonSquare.addEventListener('touchstart', this.onClickSquare);
+                this.$.buttonCircle.addEventListener('touchstart', this.onClickCircle);
+                this.$.buttonCross.addEventListener('touchstart', this.onClickCross);
+            },
+
+            onClickUp: function() {
+                // bluetoothSerial.write(thisBtCtr.keyBinding.up, thisBtCtr.onWrite, thisBtCtr.onError);
+                console.log('aa')
+                var tabll = this.get('keyBinding.custom2text')
+                console.log(tabll);
+            },
 
         });
     </script>
