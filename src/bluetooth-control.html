@@ -25,12 +25,6 @@
                 width: 150px;
             }
 
-            paper-button.button.wide {
-                /*width: 50%;*/
-            }
-            
-
-
             #leftPad iron-icon {
                 --iron-icon-height: 50px;
                 --iron-icon-width: 50px;
@@ -48,20 +42,20 @@
         <div class="horizontal layout" id="containerButtons">
             <div class="pad" id="leftPad">
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="" id="buttonUp">
+                    <paper-button id="buttonUp" raised class="">
                         <iron-icon icon="hardware:keyboard-arrow-up"></iron-icon>
                     </paper-button>
                 </div>
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="">
+                    <paper-button id="buttonLeft" raised class="">
                         <iron-icon icon="hardware:keyboard-arrow-left"></iron-icon>
                     </paper-button>
-                    <paper-button raised class="">
+                    <paper-button id="buttonRight" raised class="">
                         <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
                     </paper-button>
                 </div>
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="" id="buttonUp">
+                    <paper-button id="buttonDown" raised class="">
                         <iron-icon icon="hardware:keyboard-arrow-down"></iron-icon>
                     </paper-button>
                 </div>
@@ -70,29 +64,29 @@
             <span class="flex"></span>
 
             <div class="vertical layout">
-                <paper-button raised class="custom-button">Custom 1</paper-button>
-                <paper-button raised class="custom-button">Custom 2</paper-button>
-                <paper-button raised class="custom-button">Custom 3</paper-button>
+                <paper-button id="buttonC1" raised class="custom-button">Custom 1</paper-button>
+                <paper-button id="buttonC2" raised class="custom-button">Custom 2</paper-button>
+                <paper-button id="buttonC3" raised class="custom-button">Custom 3</paper-button>
             </div>
 
             <span class="flex"></span>
 
             <div class="pad" id="rightPad">
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="" id="buttonUp">
+                    <paper-button id="buttonTriangle" raised class="">
                         <iron-icon icon="icons:change-history"></iron-icon>
                     </paper-button>
                 </div>
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="">
+                    <paper-button id="buttonSquare" raised class="">
                         <iron-icon icon="image:crop-din"></iron-icon>
                     </paper-button>
-                    <paper-button raised class="">
+                    <paper-button id="buttonCircle" raised class="">
                         <iron-icon icon="icons:radio-button-unchecked"></iron-icon>
                     </paper-button>
                 </div>
                 <div class="horizontal center-justified layout">
-                    <paper-button raised class="" id="buttonUp">
+                    <paper-button id="buttonCross" raised class="">
                         <iron-icon icon="icons:clear"></iron-icon>
                     </paper-button>
                 </div>
@@ -113,6 +107,14 @@
 
             ready: function() {
                 this.$.containerButtons.style.marginTop = ((window.innerHeight - 60 - 195) / 2) + 'px';
+
+                this.$.buttonUp.addEventListener('touchstart', function() {console.log('a')});
+                this.$.buttonDown.addEventListener('touchstart', function() {console.log('b')});
+            },
+
+            setupEventListener: function() {
+                this.$.buttonUp.addEventListener('touchstart', function() {console.log('a')});
+                this.$.buttonDown.addEventListener('touchstart', function() {console.log('b')});
             }
 
         });

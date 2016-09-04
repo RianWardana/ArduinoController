@@ -42,20 +42,14 @@
                             <template is="dom-repeat" items="{{pairedDevices}}">
                                 <paper-item on-tap="_deviceSelected">{{item.name}}</paper-item>
                             </template>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
-                            <paper-item>sadasd</paper-item>
                         </div>
                     </iron-pages>
                 </paper-dialog-scrollable>
         </paper-dialog>
 
+        <paper-toast id="toastConnectionSuccessful" text="Connected to a bluetooth device."></paper-toast>
         <paper-toast id="toastConnectionFail" text="Fail to connect."></paper-toast>
+        <paper-toast id="toastDisconnected" text="Bluetooth device disconnected."></paper-toast>
     </template>
 
 
@@ -67,6 +61,17 @@
                 trigger: {
                     type: Number,
                     observer: '_triggered'
+                },
+
+                triggerDisconnect: {
+                    type: Number,
+                    observer: '_triggeredDisconnect'
+                },
+
+                connected: {
+                    type: Boolean,
+                    value: false,
+                    notify: true
                 },
 
                 viewSekarang: {
@@ -90,7 +95,7 @@
             },
 
             enableBluetooth: function() {
-                console.log("deviceready");
+                console.log("enableBluetooth");
 
                 bluetoothSerial.enable(thisBtCon.listPaired, function() {
                     console.log("Fail to enable bluetooth");
@@ -114,9 +119,30 @@
             },
 
             _triggered: function() {
-                console.log('teransang');
+                console.log("_triggered");
                 this.$.dialog.open();
-                if (this.openCount == 0) document.addEventListener("deviceready", this.enableBluetooth, false);
+                if (this.openCount == 0) {
+                    console.log("_triggered if")
+                    document.addEventListener("deviceready", this.enableBluetooth, false);
+                    this.openCount++;
+                }
+                else {
+                    console.log("_triggered else") 
+                    bluetoothSerial.isEnabled(function(){}, thisBtCon.enableBluetooth);    
+                }
+                
+            },
+
+            _triggeredDisconnect: function(e) {
+                console.log("_triggeredDisconnect");
+
+                bluetoothSerial.disconnect(function() {
+                    thisBtCon.connected = false;
+                    thisBtCon.$.toastDisconnected.open();
+                    thisBtCon.viewSekarang = 'list';
+                }, function() {
+                    console.log('Fail to disconnect.')
+                });
             },
 
             _deviceSelected: function(e) {
@@ -126,7 +152,9 @@
             },
 
             onConnectSuccessful: function() {
-                thisBtCon.viewSekarang = 'list';
+                thisBtCon.connected = true;
+                thisBtCon.$.dialog.close();
+                thisBtCon.$.toastConnectionSuccessful.open();
             },
 
             onConnectFail: function() {

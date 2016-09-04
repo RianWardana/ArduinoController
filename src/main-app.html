@@ -106,7 +106,11 @@
         </app-drawer-layout>
 
 
-        <bluetooth-connection trigger="{{triggerBluetoothConnect}}"></bluetooth-connection>
+        <bluetooth-connection 
+            trigger="{{triggerBluetoothConnect}}" 
+            trigger-disconnect="{{triggerBluetoothDisconnect}}" 
+            connected="{{isBluetoothConnected}}" >        
+        </bluetooth-connection>
 
     </template>
 
@@ -134,9 +138,8 @@
                     observer: '_mqttConnectionChanged'
                 },
 
-                triggerBluetoothConnect: {
-                    type: Number
-                }
+                triggerBluetoothConnect: Number,
+                triggerBluetoothDisconnect: Number
             },
 
             ready: function() {
@@ -187,6 +190,10 @@
 
             _blutoothConnectClicked: function() {
                 this.triggerBluetoothConnect = Math.random();
+            },
+
+            _blutoothDisconnectClicked: function() {
+                this.triggerBluetoothDisconnect = Math.random();
             }
         });
     </script>
