@@ -64,9 +64,9 @@
             <span class="flex"></span>
 
             <div class="vertical layout">
-                <paper-button id="buttonC1" raised class="custom-button">Custom 1</paper-button>
-                <paper-button id="buttonC2" raised class="custom-button">Custom 2</paper-button>
-                <paper-button id="buttonC3" raised class="custom-button">Custom 3</paper-button>
+                <paper-button id="buttonC1" raised class="custom-button">{{keyBinding.c1text}}</paper-button>
+                <paper-button id="buttonC2" raised class="custom-button">{{keyBinding.c2text}}</paper-button>
+                <paper-button id="buttonC3" raised class="custom-button">{{keyBinding.c3text}}</paper-button>
             </div>
 
             <span class="flex"></span>
@@ -93,8 +93,6 @@
             </div>
         </div>
 
-        <div>{{keyBinding.custom2text}}</div>
-
     </template>
 
 
@@ -114,12 +112,6 @@
                 this.$.containerButtons.style.marginTop = ((window.innerHeight - 60 - 195) / 2) + 'px';
                 
                 this.setupEventListener();
-
-                var tabll = this.get('keyBinding.down')
-
-                console.log(tabll);
-
-                // this.get('myProp.subProp')
             },
 
             setupEventListener: function() {
@@ -132,13 +124,54 @@
                 this.$.buttonSquare.addEventListener('touchstart', this.onClickSquare);
                 this.$.buttonCircle.addEventListener('touchstart', this.onClickCircle);
                 this.$.buttonCross.addEventListener('touchstart', this.onClickCross);
+
+                this.$.buttonC1.addEventListener('touchstart', this.onClickC1);
+                this.$.buttonC2.addEventListener('touchstart', this.onClickC2);
+                this.$.buttonC3.addEventListener('touchstart', this.onClickC3);
             },
 
             onClickUp: function() {
-                // bluetoothSerial.write(thisBtCtr.keyBinding.up, thisBtCtr.onWrite, thisBtCtr.onError);
-                console.log('aa')
-                var tabll = this.get('keyBinding.custom2text')
-                console.log(tabll);
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickLeft: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.left'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickRight: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.right'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickDown: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.down'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickTriangle: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickSquare: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.square'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickCircle: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickCross: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickC1: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickC2: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
+            },
+
+            onClickC3: function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
             },
 
         });
