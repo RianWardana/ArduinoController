@@ -1,0 +1,57 @@
+<dom-module id="bluetooth-configuration">
+    <template>
+        <style include="iron-flex iron-flex-alignment">
+            paper-material {
+                background: #fff;
+                margin: 30px;
+                margin-bottom: 50px;
+                padding: 10px 20px 20px;
+            }
+
+            h3 {
+                margin-top: 14px;
+                margin-bottom: 0;
+            }
+        </style>
+
+        <paper-material>
+            <h3>Key binding</h3>
+            <paper-input label="Up button" maxlength="1" value="{{keyBinding.up::change}}"></paper-input>
+            <paper-input label="Left button" maxlength="1" value="{{keyBinding.left::change}}"></paper-input>
+            <paper-input label="Right button" maxlength="1" value="{{keyBinding.right::change}}"></paper-input>
+            <paper-input label="Down button" maxlength="1" value="{{keyBinding.down::change}}"></paper-input>
+            <paper-input label="Triangle button" maxlength="1" value="{{keyBinding.triangle::change}}"></paper-input>
+            <paper-input label="Square button" maxlength="1" value="{{keyBinding.square::change}}"></paper-input>
+            <paper-input label="Circle button" maxlength="1" value="{{keyBinding.circle::change}}"></paper-input>
+            <paper-input label="Cross button" maxlength="1" value="{{keyBinding.cross::change}}"></paper-input>
+        </paper-material>
+
+        <paper-material>
+            <h3>Custom buttons</h3>
+            <paper-input label="Custom 1 button text" maxlength="10" value="{{keyBinding.c1text::change}}"></paper-input>
+            <paper-input label="Custom 2 button text" maxlength="10" value="{{keyBinding.c2text::change}}"></paper-input>
+            <paper-input label="Custom 3 button text" maxlength="10" value="{{keyBinding.c3text::change}}"></paper-input>
+            <paper-input label="Custom 1 ({{keyBinding.c1text}}) button command" maxlength="1" value="{{keyBinding.c1::change}}"></paper-input>
+            <paper-input label="Custom 2 ({{keyBinding.c2text}}) button command" maxlength="1" value="{{keyBinding.c2::change}}"></paper-input>
+            <paper-input label="Custom 3 ({{keyBinding.c3text}}) button command" maxlength="1" value="{{keyBinding.c3::change}}"></paper-input>
+        </paper-material>
+    </template>
+
+
+    <script>
+        Polymer({
+            is: 'bluetooth-configuration',
+            properties: {
+                keyBinding: {
+                    type: Object,
+                    notify: true
+                }
+            },
+
+            ready: function() {
+               thisBtCfg = this;
+            }
+
+        });
+    </script>
+</dom-module>

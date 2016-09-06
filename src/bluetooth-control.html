@@ -34,8 +34,6 @@
                 --iron-icon-height: 30px;
                 --iron-icon-width: 30px;
             }
-
-            
         </style>
 
 
@@ -131,7 +129,11 @@
             },
 
             onClickUp: function() {
-                bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+                // bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+
+                setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
             },
 
             onClickLeft: function() {
