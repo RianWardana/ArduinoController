@@ -27,6 +27,7 @@
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
 
 <link rel="import" href="../bower_components/neon-animation/animations/scale-down-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/slide-from-top-animation.html">
@@ -106,8 +107,8 @@
                 </app-header>
 
                 <iron-pages role="main" selected="[[halaman_sekarang]]" attr-for-selected="halaman">
-                    <bluetooth-control halaman="Bluetooth Controller" key-binding="{{bluetoothKeyBinding}}"></bluetooth-control>
-                    <bluetooth-configuration halaman="Bluetooth Configuration" key-binding="{{bluetoothKeyBinding}}"></bluetooth-configuration>
+                    <bluetooth-control halaman="Bluetooth Controller" configuration="{{bluetoothConfiguration}}"></bluetooth-control>
+                    <bluetooth-configuration halaman="Bluetooth Configuration" configuration="{{bluetoothConfiguration}}"></bluetooth-configuration>
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
@@ -120,7 +121,7 @@
         </bluetooth-connection>
 
         <bluetooth-localstorage 
-            key-binding="{{bluetoothKeyBinding}}">
+            configuration="{{bluetoothConfiguration}}">
         </bluetooth-localstorage>
 
     </template>

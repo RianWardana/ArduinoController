@@ -12,34 +12,72 @@
                 margin-top: 14px;
                 margin-bottom: 0;
             }
+
+            paper-item {
+                --paper-item-selected: {
+                    background: #eee;
+                };
+
+                --paper-item-focused: {
+                    background: white;
+                }
+            }
         </style>
 
         <paper-material>
             <h3>Key binding</h3>
-            <paper-input label="Up button" maxlength="1" value="{{keyBinding.up::change}}"></paper-input>
-            <paper-input label="Left button" maxlength="1" value="{{keyBinding.left::change}}"></paper-input>
-            <paper-input label="Right button" maxlength="1" value="{{keyBinding.right::change}}"></paper-input>
-            <paper-input label="Down button" maxlength="1" value="{{keyBinding.down::change}}"></paper-input>
-            <paper-input label="Triangle button" maxlength="1" value="{{keyBinding.triangle::change}}"></paper-input>
-            <paper-input label="Square button" maxlength="1" value="{{keyBinding.square::change}}"></paper-input>
-            <paper-input label="Circle button" maxlength="1" value="{{keyBinding.circle::change}}"></paper-input>
-            <paper-input label="Cross button" maxlength="1" value="{{keyBinding.cross::change}}"></paper-input>
+            <paper-input label="Up button" maxlength="1" value="{{configuration.up::change}}"></paper-input>
+            <paper-input label="Left button" maxlength="1" value="{{configuration.left::change}}"></paper-input>
+            <paper-input label="Right button" maxlength="1" value="{{configuration.right::change}}"></paper-input>
+            <paper-input label="Down button" maxlength="1" value="{{configuration.down::change}}"></paper-input>
+            <paper-input label="Triangle button" maxlength="1" value="{{configuration.triangle::change}}"></paper-input>
+            <paper-input label="Square button" maxlength="1" value="{{configuration.square::change}}"></paper-input>
+            <paper-input label="Circle button" maxlength="1" value="{{configuration.circle::change}}"></paper-input>
+            <paper-input label="Cross button" maxlength="1" value="{{configuration.cross::change}}"></paper-input>
         </paper-material>
 
         <paper-material>
             <h3>Custom buttons</h3>
-            <paper-input label="Custom 1 button text" maxlength="10" value="{{keyBinding.c1text::change}}"></paper-input>
-            <paper-input label="Custom 2 button text" maxlength="10" value="{{keyBinding.c2text::change}}"></paper-input>
-            <paper-input label="Custom 3 button text" maxlength="10" value="{{keyBinding.c3text::change}}"></paper-input>
-            <paper-input label="Custom 1 ({{keyBinding.c1text}}) button command" maxlength="1" value="{{keyBinding.c1::change}}"></paper-input>
-            <paper-input label="Custom 2 ({{keyBinding.c2text}}) button command" maxlength="1" value="{{keyBinding.c2::change}}"></paper-input>
-            <paper-input label="Custom 3 ({{keyBinding.c3text}}) button command" maxlength="1" value="{{keyBinding.c3::change}}"></paper-input>
+            <paper-input label="Custom 1 button text" maxlength="10" value="{{configuration.c1text::change}}"></paper-input>
+            <paper-input label="Custom 2 button text" maxlength="10" value="{{configuration.c2text::change}}"></paper-input>
+            <paper-input label="Custom 3 button text" maxlength="10" value="{{configuration.c3text::change}}"></paper-input>
+            <paper-input label="Custom 1 ({{configuration.c1text}}) button command" maxlength="1" value="{{configuration.c1::change}}"></paper-input>
+            <paper-input label="Custom 2 ({{configuration.c2text}}) button command" maxlength="1" value="{{configuration.c2::change}}"></paper-input>
+            <paper-input label="Custom 3 ({{configuration.c3text}}) button command" maxlength="1" value="{{configuration.c3::change}}"></paper-input>
         </paper-material>
 
         <paper-material>
-            <h3>Data transmission</h3>
-            <p>By default this application will send </p>
+            <h3>Transmission method</h3>
+            <iron-selector attr-for-selected selected="{{configuration.method}}">
+                <paper-item>Repeat with interval</paper-item>
+                <paper-item>Event-based listener</paper-item>
+            </iron-selector>
+            <template is="dom-if" if="{{!configuration.method}}">
+                <p>Command will be sent repeatedly until the button is released. Repeating interval can be configured.</p>
+            </template>
+            <template is="dom-if" if="{{configuration.method}}">
+                <p>Command will be sent once for each button pressed. Another command will be sent when the button is released.</p>
+            </template>
         </paper-material>
+
+        <template is="dom-if" if="{{!configuration.method}}">
+            <paper-material id="repeatInterval">
+                <h3>Repeat interval</h3>
+                <paper-input label="Value between 10 to 1000" maxlength="10" value="{{configuration.interval::change}}" type="number" auto-validate allowed-pattern="[0-9]">
+                    <div suffix>millisecond</div>
+                </paper-input>
+                <p>Interval in which each button will repeatedly send its configured command while being pressed.</p>
+            </paper-material>
+        </template>
+
+        <template is="dom-if" if="{{configuration.method}}">
+            <paper-material id="commandReleased">
+                <h3>Released button command</h3>
+                <paper-input label="Command to send when a button is released" maxlength="1" value="{{configuration.released::change}}"></paper-input>
+            </paper-material>
+        </template>
+
+
     </template>
 
 
@@ -47,7 +85,7 @@
         Polymer({
             is: 'bluetooth-configuration',
             properties: {
-                keyBinding: {
+                configuration: {
                     type: Object,
                     notify: true
                 }
