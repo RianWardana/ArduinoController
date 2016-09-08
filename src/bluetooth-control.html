@@ -117,63 +117,146 @@
                 this.$.buttonLeft.addEventListener('touchstart', this.onClickLeft);
                 this.$.buttonRight.addEventListener('touchstart', this.onClickRight);
                 this.$.buttonDown.addEventListener('touchstart', this.onClickDown);
-
                 this.$.buttonTriangle.addEventListener('touchstart', this.onClickTriangle);
                 this.$.buttonSquare.addEventListener('touchstart', this.onClickSquare);
                 this.$.buttonCircle.addEventListener('touchstart', this.onClickCircle);
                 this.$.buttonCross.addEventListener('touchstart', this.onClickCross);
-
                 this.$.buttonC1.addEventListener('touchstart', this.onClickC1);
                 this.$.buttonC2.addEventListener('touchstart', this.onClickC2);
                 this.$.buttonC3.addEventListener('touchstart', this.onClickC3);
+
+                this.$.buttonUp.addEventListener('touchend', this.onReleaseUp);
+                this.$.buttonLeft.addEventListener('touchend', this.onReleaseLeft);
+                this.$.buttonRight.addEventListener('touchend', this.onReleaseRight);
+                this.$.buttonDown.addEventListener('touchend', this.onReleaseDown);
+                this.$.buttonTriangle.addEventListener('touchend', this.onReleaseTriangle);
+                this.$.buttonSquare.addEventListener('touchend', this.onReleaseSquare);
+                this.$.buttonCircle.addEventListener('touchend', this.onReleaseCircle);
+                this.$.buttonCross.addEventListener('touchend', this.onReleaseCross);
+                this.$.buttonC1.addEventListener('touchend', this.onReleaseC1);
+                this.$.buttonC2.addEventListener('touchend', this.onReleaseC2);
+                this.$.buttonC3.addEventListener('touchend', this.onReleaseC3);
             },
 
             onClickUp: function() {
-                // bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
-
-                setInterval(function() {
+                bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalUp = setInterval(function() {
                     bluetoothSerial.write(thisBtCtr.get('keyBinding.up'), thisBtCtr.onWrite, thisBtCtr.onError);
                 }, 200);
             },
 
+            onReleaseUp: function() {
+                clearInterval(intervalUp);
+            },
+
             onClickLeft: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.left'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalLeft = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.left'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseLeft: function() {
+                clearInterval(intervalLeft);
             },
 
             onClickRight: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.right'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalRight = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.right'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseRight: function() {
+                clearInterval(intervalRight);
             },
 
             onClickDown: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.down'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalDown = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.down'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseDown: function() {
+                clearInterval(intervalDown);
             },
 
             onClickTriangle: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalTriangle = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseTriangle: function() {
+                clearInterval(intervalTriangle);
             },
 
             onClickSquare: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.square'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalSquare = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.square'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseSquare: function() {
+                clearInterval(intervalSquare);
             },
 
             onClickCircle: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalCircle = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseCircle: function() {
+                clearInterval(intervalCircle);
             },
 
             onClickCross: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalCross = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseCross: function() {
+                clearInterval(intervalCross);
             },
 
             onClickC1: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalC1 = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseC1: function() {
+                clearInterval(intervalC1);
             },
 
             onClickC2: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalC2 = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseC2: function() {
+                clearInterval(intervalC2);
             },
 
             onClickC3: function() {
                 bluetoothSerial.write(thisBtCtr.get('keyBinding.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
+                intervalC3 = setInterval(function() {
+                    bluetoothSerial.write(thisBtCtr.get('keyBinding.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
+                }, 200);
+            },
+
+            onReleaseC3: function() {
+                clearInterval(intervalC3);
             },
 
         });
