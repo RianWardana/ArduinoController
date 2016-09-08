@@ -139,7 +139,7 @@
             },
 
             onClickUp: function() {
-                bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+                // bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
                 intervalUp = setInterval(function() {
                     bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
                 }, thisBtCtr.get('configuration.interval'));
