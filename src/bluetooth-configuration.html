@@ -48,7 +48,7 @@
 
         <paper-material>
             <h3>Transmission method</h3>
-            <iron-selector attr-for-selected selected="{{configuration.method}}">
+            <iron-selector selected="{{configuration.method}}">
                 <paper-item>Repeat with interval</paper-item>
                 <paper-item>Event-based listener</paper-item>
             </iron-selector>
@@ -61,12 +61,12 @@
         </paper-material>
 
         <template is="dom-if" if="{{!configuration.method}}">
-            <paper-material id="repeatInterval">
+            <paper-material id="intervalMaterial">
                 <h3>Repeat interval</h3>
-                <paper-input label="Value between 10 to 1000" maxlength="10" value="{{configuration.interval::change}}" type="number" auto-validate allowed-pattern="[0-9]">
+                <paper-input label="Value between 10 to 1000" min="10" max="1000" maxlength="4" value="{{repeatInterval::change}}" type="tel" auto-validate allowed-pattern="[0-9]">
                     <div suffix>millisecond</div>
                 </paper-input>
-                <p>Interval in which each button will repeatedly send its configured command while being pressed.</p>
+                <p>Interval in which each button will repeatedly send its configured command while being pressed. Recommended value is 200 milliseconds.</p>
             </paper-material>
         </template>
 
@@ -88,11 +88,29 @@
                 configuration: {
                     type: Object,
                     notify: true
+                },
+
+                repeatInterval: {
+                    type: Number,
+                    observer: '_repeatIntervalChanged'
                 }
             },
 
             ready: function() {
-               thisBtCfg = this;
+                thisBtCfg = this;
+
+                setTimeout(function() {
+                    thisBtCfg.repeatInterval = thisBtCfg.get('configuration.interval');
+                }, 100);
+            },
+
+            _repeatIntervalChanged: function(interval) {
+                if (interval < 10) var regulatedInterval = 10;
+                else if (interval > 1000) var regulatedInterval = 1000;
+                else var regulatedInterval = interval;
+
+                this.set('configuration.interval', regulatedInterval);
+                this.repeatInterval = regulatedInterval;
             }
 
         });

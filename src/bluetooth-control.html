@@ -139,10 +139,13 @@
             },
 
             onClickUp: function() {
-                // bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalUp = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                bluetoothSerial.write(thisBtCtr.get('configuration.up'), thisBtCtr.onWrite, thisBtCtr.onError);
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalUp = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.up'));
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseUp: function() {
@@ -155,9 +158,12 @@
 
             onClickLeft: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.left'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalLeft = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.left'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalLeft = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.left'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseLeft: function() {
@@ -170,9 +176,12 @@
 
             onClickRight: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.right'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalRight = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.right'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalRight = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.right'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseRight: function() {
@@ -185,9 +194,12 @@
 
             onClickDown: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.down'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalDown = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.down'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalDown = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.down'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseDown: function() {
@@ -200,9 +212,12 @@
 
             onClickTriangle: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalTriangle = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalTriangle = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.triangle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseTriangle: function() {
@@ -215,9 +230,12 @@
 
             onClickSquare: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.square'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalSquare = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.square'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalSquare = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.square'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseSquare: function() {
@@ -230,9 +248,12 @@
 
             onClickCircle: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalCircle = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalCircle = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.circle'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseCircle: function() {
@@ -245,9 +266,12 @@
 
             onClickCross: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalCross = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalCross = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.cross'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseCross: function() {
@@ -260,9 +284,12 @@
 
             onClickC1: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalC1 = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalC1 = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.c1'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseC1: function() {
@@ -275,9 +302,12 @@
 
             onClickC2: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalC2 = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalC2 = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.c2'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseC2: function() {
@@ -290,9 +320,12 @@
 
             onClickC3: function() {
                 bluetoothSerial.write(thisBtCtr.get('configuration.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
-                intervalC3 = setInterval(function() {
-                    bluetoothSerial.write(thisBtCtr.get('configuration.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
-                }, thisBtCtr.get('configuration.interval'));
+                
+                if (thisBtCtr.get('configuration.method') == 0) {
+                    intervalC3 = setInterval(function() {
+                        bluetoothSerial.write(thisBtCtr.get('configuration.c3'), thisBtCtr.onWrite, thisBtCtr.onError);
+                    }, thisBtCtr.get('configuration.interval'));
+                }
             },
 
             onReleaseC3: function() {
