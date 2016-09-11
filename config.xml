@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.rianwardana.arduinocontroller" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ArduinoController</name>
+<widget id="com.rianwardana.arduinocontroller" version="16.09.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Arduino Controller</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Arduino controller using Bluetooth and MQTT.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="gmail@rianwardana.com" href="https://github.com/rianwardana">
+        Rian Wardana
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -17,11 +17,18 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon src="www/img/icon.png" />
         <preference name="Orientation" value="landscape" />
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
+        
+        <preference name="SplashMaintainAspectRatio" value="true" />
+        <preference name="ShowSplashScreenSpinner" value="false"/>
+        <preference name="SplashScreenDelay" value="5000" />
+        <preference name="FadeSplashScreenDuration" value="300"/>
+        <preference name="SplashShowOnlyFirstTime" value="false" />
+
+        <splash src="www/img/hdpi.png" density="land-hdpi"/>
+        <splash src="www/img/mdpi.png" density="land-mdpi"/>
+        <splash src="www/img/xhdpi.png" density="land-xhdpi"/>
     </platform>
     <engine name="android" spec="~5.1.1" />
     <plugin name="cordova-plugin-whitelist" spec="1" />

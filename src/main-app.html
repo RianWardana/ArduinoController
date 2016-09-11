@@ -14,6 +14,7 @@
 <link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
@@ -69,6 +70,8 @@
 
         <app-drawer-layout fullbleed>
             <app-drawer>
+                <iron-image style="width:256px; height:128px;" sizing="cover" src="../img/drawer.png"></iron-image>
+                <!-- <iron-image style="width:256px; height:100px;" sizing="cover" src="http://lorempixel.com/256/100"></iron-image> -->
                 <iron-selector selected="{{halaman_sekarang}}" attr-for-selected="halaman" class="drawer-list" role="navigation" on-iron-select="onMenuSelect">
                     <paper-item halaman="Bluetooth Controller">
                         <iron-icon icon="hardware:gamepad"></iron-icon>
@@ -155,10 +158,7 @@
             },
 
             ready: function() {
-                console.log("main-app.html");
-                document.addEventListener("deviceready", function() {
-                    StatusBar.backgroundColorByHexString("#007A7F")
-                }, false);
+                // console.log("main-app.html");
             },
 
             onMenuSelect: function() {

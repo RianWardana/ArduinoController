@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var polybuild = require('polybuild');
 var rename = require('gulp-rename');
+var sync = require('gulp-file-sync');
 
 gulp.task('build', function() {
 	return gulp.src('index.html')
@@ -9,8 +10,9 @@ gulp.task('build', function() {
 });
 
 gulp.task('cloneImages', function() {
-	return gulp.src('img/*.*')
-	.pipe(gulp.dest('../cordova/www/img'))
+	// return gulp.src('img/*.*')
+	// .pipe(gulp.dest('../cordova/www/img'))
+	sync('img', '../cordova/www/img', {recursive: false});
 });
 
 gulp.task('cloneCordova', function() {
